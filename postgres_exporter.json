@@ -808,7 +808,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "Observe",
+      "datasource": "${DS_PROMETHEUS}",
       "format": "percentunit",
       "gauge": {
         "maxValue": 1,
@@ -890,7 +890,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "Observe",
+      "datasource": "${DS_PROMETHEUS}",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -2271,8 +2271,8 @@
       {
         "allValue": null,
         "current": {
-          "text": "Development:9187",
-          "value": "Development:9187"
+          "text": "",
+          "value": ""
         },
       "datasource": "${DS_PROMETHEUS}",
         "definition": "",
