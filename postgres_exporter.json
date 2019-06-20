@@ -132,7 +132,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "pg_static",
+          "expr": "pg_static{instance=\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{short_version}}",
@@ -942,7 +942,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "pg_settings_seq_page_cost",
+          "expr": "pg_settings_seq_page_cost{instance=\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
