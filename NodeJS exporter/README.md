@@ -15,9 +15,7 @@ Node.js has a simple module loading system. In Node.js, files and modules are in
 
 `
 
-/**
- * Newly added requires
- */
+/** * Newly added requires */
 
 var Register = require('prom-client').register;  
 var Counter = require('prom-client').Counter;  
@@ -26,10 +24,7 @@ var Summary = require('prom-client').Summary;
 var ResponseTime = require('response-time');  
 var Logger = require('./logger');
 
-/**
- * A Prometheus counter that counts the invocations of the different HTTP verbs
- * e.g. a GET and a POST call will be counted as 2 different calls
- */
+/** * A Prometheus counter that counts the invocations of the different HTTP verbs * e.g. a GET and a POST call will be counted as 2 different calls */
 
 module.exports.numOfRequests = numOfRequests = new Counter({  
     name: 'numOfRequests',
@@ -37,10 +32,7 @@ module.exports.numOfRequests = numOfRequests = new Counter({
     labelNames: ['method']
 });
 
-/**
- * A Prometheus counter that counts the invocations with different paths
- * e.g. /foo and /bar will be counted as 2 different paths
- */
+/** * A Prometheus counter that counts the invocations with different paths. e.g. /foo and /bar will be counted as 2 different paths */
 
 module.exports.pathsTaken = pathsTaken = new Counter({  
     name: 'pathsTaken',
@@ -48,9 +40,7 @@ module.exports.pathsTaken = pathsTaken = new Counter({
     labelNames: ['path']
 });
 
-/**
- * A Prometheus summary to record the HTTP method, path, response code and response time
- */
+/** * A Prometheus summary to record the HTTP method, path, response code and response time */
 
 module.exports.responses = responses = new Summary({  
     name: 'responses',
@@ -58,19 +48,14 @@ module.exports.responses = responses = new Summary({
     labelNames: ['method', 'path', 'status']
 });
 
-/**
- * This funtion will start the collection of metrics and should be called from within in the main js file
- */
+/** * This funtion will start the collection of metrics and should be called from within in the main js file */
 
 module.exports.startCollection = function () {  
     Logger.log(Logger.LOG_INFO, `Starting the collection of metrics, the metrics are available on /metrics`);
     require('prom-client').collectDefaultMetrics();
 };
 
-/**
- * This function increments the counters that are executed on the request side of an invocation
- * Currently it increments the counters for numOfPaths and pathsTaken
- */
+/** * This function increments the counters that are executed on the request side of an invocation. Currently it increments the counters for numOfPaths and pathsTaken */
 
 module.exports.requestCounters = function (req, res, next) {  
     if (req.path != '/metrics') {
@@ -80,10 +65,7 @@ module.exports.requestCounters = function (req, res, next) {
     next();
 }
 
-/**
- * This function increments the counters that are executed on the response side of an invocation
- * Currently it updates the responses summary
- */
+/** * This function increments the counters that are executed on the response side of an invocation. Currently it updates the responses summary */
 
 module.exports.responseCounters = ResponseTime(function (req, res, time) {  
     if(req.url != '/metrics') {
@@ -91,9 +73,7 @@ module.exports.responseCounters = ResponseTime(function (req, res, time) {
     }
 })
 
-/**
- * In order to have Prometheus get the data from this app a specific URL is registered
- */
+/** * In order to have Prometheus get the data from this app a specific URL is registered */
 
 module.exports.injectMetricsRoute = function (App) {  
     App.get('/metrics', (req, res) => {
@@ -113,30 +93,21 @@ Now from the server.js file you only need a few lines of JavaScript code
 'use strict';
 
 ...
-/**
- * This creates the module that we created in the step before.
- * In my case it is stored in the util folder.
- */
+/** * This creates the module that we created in the step before.In my case it is stored in the util folder. */
 
 var Prometheus = require('./util/prometheus');  
 ...
 
-/**
- * The below arguments start the counter functions
- */
+/**  * The below arguments start the counter functions */
 
 App.use(Prometheus.requestCounters);  
 App.use(Prometheus.responseCounters);
 
-/**
- * Enable metrics endpoint
- */
+/** * Enable metrics endpoint */
 
 Prometheus.injectMetricsRoute(App);
 
-/**
- * Enable collection of default metrics
- */
+/** * Enable collection of default metrics */
 
 Prometheus.startCollection();  
 ...
@@ -148,14 +119,16 @@ Deploy it and modify the your Prometheus `yml` file.
 
 eg:
 
-`
-  - job_name: 'NodeJS Server'
+
+
+  `-` job_name: 'NodeJS Server'
 
     scrape_interval: 50s
 
     static_configs:
 
-      - targets: ['NodeJSserver:4000']
-`
+     - targets: ['NodeJSserver:4000']
+
+
 
 Referance: [https://community.tibco.com/wiki/monitoring-your-nodejs-apps-prometheus](https://community.tibco.com/wiki/monitoring-your-nodejs-apps-prometheus)
