@@ -88,7 +88,7 @@ Adding code to server.js
 
 Now from the server.js file you only need a few lines of JavaScript code
 
-`
+```
 
 'use strict';
 
@@ -112,7 +112,8 @@ Prometheus.injectMetricsRoute(App);
 Prometheus.startCollection();  
 ...
 
-`
+```
+
 By only adding 5 lines of code in the server.js file you can effectively monitor your app!
 
 Deploy it and modify the your Prometheus `yml` file.
@@ -120,15 +121,12 @@ Deploy it and modify the your Prometheus `yml` file.
 eg:
 
 
-
-  `-` job_name: 'NodeJS Server'
-
+```
+  - job_name: 'NodeJS Server'
     scrape_interval: 50s
-
     static_configs:
-
      - targets: ['NodeJSserver:4000']
-
+```
 
 
 Referance: [https://community.tibco.com/wiki/monitoring-your-nodejs-apps-prometheus](https://community.tibco.com/wiki/monitoring-your-nodejs-apps-prometheus)
