@@ -13,7 +13,7 @@ Creating a module
 
 Node.js has a simple module loading system. In Node.js, files and modules are in one-to-one correspondence (each file is treated as a separate module). To follow the best practices of Node.js, and make our code as reusable and readable as possible, we'll create a new module and use that in our main code later on. It is a lot of JavaScript code, but I've really done my best to document it.
 
-`
+```
 
 /** * Newly added requires */
 
@@ -82,7 +82,7 @@ module.exports.injectMetricsRoute = function (App) {
     });
 };
 
-`
+```
 
 Adding code to server.js
 
