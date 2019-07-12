@@ -635,169 +635,101 @@
       "valueName": "current"
     },
     {
+      "aliasColors": {},
+      "bars": false,
       "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": false,
-      "colors": [
-        "#d44a3a",
-        "rgba(237, 129, 40, 0.89)",
-        "#299c46"
-      ],
+      "dashLength": 10,
+      "dashes": false,
       "datasource": "${DS_PROMETHEUS}",
-      "format": "percentunit",
-      "gauge": {
-        "maxValue": 1,
-        "minValue": 0,
-        "show": true,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
+      "fill": 1,
       "gridPos": {
         "h": 6,
-        "w": 3,
+        "w": 6,
         "x": 0,
         "y": 4
       },
-      "id": 54,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "avg_over_time(pg_up{instance=~\"$instance\"}[$__interval]) or avg_over_time(up{instance=~\"$instance\"}[$__interval]) ",
-          "format": "time_series",
-          "interval": "1m",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "thresholds": "0.8, 0.9",
-      "title": "Availability",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "avg"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": false,
-      "colors": [
-        "#299c46",
-        "rgba(237, 129, 40, 0.89)",
-        "#d44a3a"
-      ],
-      "datasource": "${DS_PROMETHEUS}",
-      "decimals": 1,
-      "format": "percentunit",
-      "gauge": {
-        "maxValue": 1,
-        "minValue": 0,
-        "show": true,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 3,
-        "x": 3,
-        "y": 4
-      },
       "id": 71,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
       },
-      "tableColumn": "",
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "paceLength": 10,
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "stack": false,
+      "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(avg_over_time(pg_stat_activity_count{instance=~\"$instance\",state=\"active\"}[$__interval])) /\nsum(pg_settings_max_connections{instance=~\"$instance\"})",
+          "expr": "sum(pg_stat_activity_count)\n",
           "format": "time_series",
+          "hide": false,
           "interval": "1m",
           "intervalFactor": 1,
-          "legendFormat": "",
+          "legendFormat": "Current connections",
           "refId": "A"
-        }
-      ],
-      "thresholds": "0.8, 0.9",
-      "title": "Active Connections",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
+        },
         {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
+          "expr": "sum(pg_settings_max_connections)",
+          "format": "time_series",
+          "hide": false,
+          "interval": "1m",
+          "intervalFactor": 1,
+          "legendFormat": "Max connections",
+          "refId": "B"
         }
       ],
-      "valueName": "avg"
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Connections",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "none",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "none",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "cacheTimeout": null,
@@ -1236,7 +1168,10 @@
         "hideZero": true,
         "max": true,
         "min": true,
+        "rightSide": true,
         "show": true,
+        "sort": "current",
+        "sortDesc": true,
         "total": false,
         "values": true
       },
@@ -1255,10 +1190,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "pg_stat_activity_count{instance=\"$instance\", datname=\"$db\"}",
+          "expr": "pg_stat_activity_count{instance=\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "{{state}}",
+          "legendFormat": "{{datname}} {{state}}",
           "refId": "A"
         }
       ],
@@ -1266,7 +1201,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Connections",
+      "title": "Connections in detail",
       "tooltip": {
         "shared": true,
         "sort": 2,
@@ -1318,14 +1253,19 @@
       },
       "id": 8,
       "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "hideEmpty": true,
+        "hideZero": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
         "show": true,
+        "sort": "current",
+        "sortDesc": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -1342,17 +1282,17 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(pg_stat_database_xact_commit{instance=\"$instance\", datname=\"$db\"}[5m])",
+          "expr": "irate(pg_stat_database_xact_commit{instance=\"$instance\"}[5m])",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "commits",
+          "legendFormat": "{{datname}} commits",
           "refId": "A"
         },
         {
-          "expr": "irate(pg_stat_database_xact_rollback{instance=\"$instance\", datname=\"$db\"}[5m])",
+          "expr": "irate(pg_stat_database_xact_rollback{instance=\"$instance\"}[5m])",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "rollbacks",
+          "legendFormat": "{{datname}} rollbacks",
           "refId": "B"
         }
       ],
@@ -1363,7 +1303,7 @@
       "title": "Transactions",
       "tooltip": {
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
       "type": "graph",
@@ -1415,9 +1355,14 @@
         "alignAsTable": true,
         "avg": true,
         "current": true,
+        "hideEmpty": true,
+        "hideZero": true,
         "max": true,
         "min": true,
+        "rightSide": true,
         "show": true,
+        "sort": "max",
+        "sortDesc": true,
         "total": false,
         "values": true
       },
@@ -1436,17 +1381,17 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(pg_stat_database_tup_fetched{instance=\"$instance\", datname=\"$db\"}[5m])",
+          "expr": "irate(pg_stat_database_tup_fetched{instance=\"$instance\"}[5m])",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "SELECT (index scan)",
+          "legendFormat": "{{datname}} SELECT (index scan)",
           "refId": "A"
         },
         {
-          "expr": "irate(pg_stat_database_tup_returned{instance=\"$instance\", datname=\"$db\"}[5m])",
+          "expr": "irate(pg_stat_database_tup_returned{instance=\"$instance\"}[5m])",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "SELECT (table scan)",
+          "legendFormat": "{{datname}} SELECT (table scan)",
           "refId": "B"
         }
       ],
@@ -1457,7 +1402,7 @@
       "title": "Read Stats",
       "tooltip": {
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
       "type": "graph",
@@ -1510,9 +1455,14 @@
         "alignAsTable": true,
         "avg": true,
         "current": true,
+        "hideEmpty": true,
+        "hideZero": true,
         "max": true,
         "min": true,
+        "rightSide": true,
         "show": true,
+        "sort": "max",
+        "sortDesc": false,
         "total": false,
         "values": true
       },
@@ -1531,24 +1481,24 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(pg_stat_database_tup_inserted{instance=\"$instance\", datname=\"$db\"}[5m])",
+          "expr": "irate(pg_stat_database_tup_inserted{instance=\"$instance\"}[5m])",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "INSERT",
+          "legendFormat": "{{datname}} INSERT",
           "refId": "A"
         },
         {
-          "expr": "irate(pg_stat_database_tup_updated{instance=\"$instance\", datname=\"$db\"}[5m])",
+          "expr": "irate(pg_stat_database_tup_updated{instance=\"$instance\"}[5m])",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "UPDATE",
+          "legendFormat": "{{datname}} UPDATE",
           "refId": "B"
         },
         {
-          "expr": "irate(pg_stat_database_tup_deleted{instance=\"$instance\", datname=\"$db\"}[5m])",
+          "expr": "irate(pg_stat_database_tup_deleted{instance=\"$instance\"}[5m])",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "DELETE",
+          "legendFormat": "{{datname}} DELETE",
           "refId": "C"
         }
       ],
@@ -1559,7 +1509,7 @@
       "title": "Change Stats",
       "tooltip": {
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
       "type": "graph",
@@ -1615,7 +1565,10 @@
         "hideZero": true,
         "max": true,
         "min": true,
+        "rightSide": true,
         "show": true,
+        "sort": "max",
+        "sortDesc": true,
         "total": false,
         "values": true
       },
@@ -1634,10 +1587,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "pg_stat_activity_max_tx_duration{instance=\"$instance\", datname=\"$db\"}",
+          "expr": "pg_stat_activity_max_tx_duration{instance=\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "max_tx_duration [{{state}}]",
+          "legendFormat": "{{datname}} max_tx_duration [{{state}}]",
           "refId": "A"
         }
       ],
@@ -1648,7 +1601,7 @@
       "title": "Longest Transaction",
       "tooltip": {
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
       "type": "graph",
@@ -1697,13 +1650,19 @@
       },
       "id": 44,
       "legend": {
+        "alignAsTable": true,
         "avg": false,
-        "current": false,
+        "current": true,
+        "hideEmpty": true,
+        "hideZero": true,
         "max": false,
         "min": false,
-        "show": false,
+        "rightSide": true,
+        "show": true,
+        "sort": null,
+        "sortDesc": null,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -1720,10 +1679,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "pg_stat_database_blks_hit{instance=\"$instance\", datname=\"$db\"} / (pg_stat_database_blks_read{instance=\"$instance\", datname=\"$db\"} + pg_stat_database_blks_hit{instance=\"$instance\", datname=\"$db\"})",
+          "expr": "pg_stat_database_blks_hit{instance=\"$instance\"} / (pg_stat_database_blks_read{instance=\"$instance\"} + pg_stat_database_blks_hit{instance=\"$instance\"})",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "Cache Hit Rate",
+          "legendFormat": "{{datname}} Cache Hit Rate",
           "refId": "A"
         }
       ],
@@ -1734,7 +1693,7 @@
       "title": "Cache Hit Rate",
       "tooltip": {
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
       "type": "graph",
@@ -1791,7 +1750,7 @@
       "fill": 1,
       "gridPos": {
         "h": 6,
-        "w": 17,
+        "w": 12,
         "x": 0,
         "y": 38
       },
@@ -1864,7 +1823,7 @@
       "title": "Buffers (bgwriter)",
       "tooltip": {
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
       "type": "graph",
@@ -1907,19 +1866,23 @@
       "fill": 1,
       "gridPos": {
         "h": 6,
-        "w": 7,
-        "x": 17,
+        "w": 12,
+        "x": 12,
         "y": 38
       },
       "id": 28,
       "legend": {
+        "alignAsTable": true,
         "avg": false,
-        "current": false,
+        "current": true,
+        "hideEmpty": true,
+        "hideZero": true,
         "max": false,
         "min": false,
+        "rightSide": true,
         "show": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -1936,17 +1899,17 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(pg_stat_database_conflicts{instance=\"$instance\", datname=\"$db\"}[5m])",
+          "expr": "irate(pg_stat_database_conflicts{instance=\"$instance\"}[5m])",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "conflicts",
+          "legendFormat": "{{datname}} conflicts",
           "refId": "B"
         },
         {
-          "expr": "irate(pg_stat_database_deadlocks{instance=\"$instance\", datname=\"$db\"}[5m])",
+          "expr": "irate(pg_stat_database_deadlocks{instance=\"$instance\"}[5m])",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "deadlocks",
+          "legendFormat": "{{datname}} deadlocks",
           "refId": "A"
         }
       ],
@@ -1957,7 +1920,7 @@
       "title": "Conflicts/Deadlocks",
       "tooltip": {
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
       "type": "graph",
@@ -2000,8 +1963,8 @@
       "decimals": 0,
       "fill": 1,
       "gridPos": {
-        "h": 7,
-        "w": 17,
+        "h": 6,
+        "w": 12,
         "x": 0,
         "y": 44
       },
@@ -2010,6 +1973,8 @@
         "alignAsTable": true,
         "avg": true,
         "current": true,
+        "hideEmpty": true,
+        "hideZero": true,
         "max": true,
         "min": true,
         "rightSide": true,
@@ -2032,10 +1997,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "pg_locks_count{instance=\"$instance\", datname=\"$db\"}",
+          "expr": "pg_locks_count{instance=\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "{{mode}}",
+          "legendFormat": "{{datname}} {{mode}}",
           "refId": "A"
         }
       ],
@@ -2046,7 +2011,7 @@
       "title": "Lock Tables",
       "tooltip": {
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
       "type": "graph",
@@ -2090,20 +2055,24 @@
       "description": "Total amount of data written to temporary files by queries in this database. All temporary files are counted, regardless of why the temporary file was created, and regardless of the log_temp_files setting.",
       "fill": 1,
       "gridPos": {
-        "h": 7,
-        "w": 7,
-        "x": 17,
+        "h": 6,
+        "w": 12,
+        "x": 12,
         "y": 44
       },
       "id": 40,
       "legend": {
+        "alignAsTable": true,
         "avg": false,
-        "current": false,
-        "max": false,
+        "current": true,
+        "hideEmpty": true,
+        "hideZero": true,
+        "max": true,
         "min": false,
-        "show": false,
+        "rightSide": true,
+        "show": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -2120,10 +2089,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(pg_stat_database_temp_bytes{instance=\"$instance\", datname=\"$db\"}[5m])",
+          "expr": "irate(pg_stat_database_temp_bytes{instance=\"$instance\"}[5m])",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "Temp Bytes",
+          "legendFormat": "{{datname}} Temp Bytes",
           "refId": "A"
         }
       ],
@@ -2134,7 +2103,7 @@
       "title": "Temp File",
       "tooltip": {
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
       "type": "graph",
@@ -2179,7 +2148,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 51
+        "y": 50
       },
       "id": 38,
       "legend": {
@@ -2188,6 +2157,7 @@
         "current": true,
         "max": true,
         "min": true,
+        "rightSide": true,
         "show": true,
         "total": false,
         "values": true
@@ -2283,31 +2253,6 @@
         "name": "instance",
         "options": [],
         "query": "label_values(pg_up, instance)",
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 1,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "allValue": null,
-        "current": {
-          "text": "Revenue-Report",
-          "value": "Revenue-Report"
-        },
-        "datasource": "${DS_PROMETHEUS}",
-        "definition": "",
-        "hide": 0,
-        "includeAll": false,
-        "label": "Database",
-        "multi": false,
-        "name": "db",
-        "options": [],
-        "query": "label_values(pg_stat_database_tup_fetched{datname!~\"template.*|postgres\"},datname)",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
